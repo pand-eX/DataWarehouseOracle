@@ -37,7 +37,8 @@ Para iniciarmos o projeto precisamos estudar o processo de implementação de um
 ![3](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/3.png)
 ![4](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/4.png)
 
-- Na parte de Compreensão das necessidades do cliente precisa fazer uma reunião com Diretores e Gestores nas sessões de Captura de conhecimento onde listaremos:
+Na parte de Compreensão das necessidades do cliente precisa fazer uma reunião com Diretores e Gestores nas sessões de Captura de conhecimento onde listaremos:
+
 - Qual o objetivo?
 - Quem se beneficia deste Projeto?
 - Quais os problemas atuais?
