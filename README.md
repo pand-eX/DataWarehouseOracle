@@ -30,6 +30,7 @@ Vou tomar como base que você já implementou o Oracle no SO Linux(Redhat), se e
 vamos começar executando o sistema para fonte de dados. Lembrando que em um projeto de DW você não precisa cria a fonte isso será o sistema de banco de dados RCP, sistema CRM, uma planilha Excel, um arquivo txt ou de qualquer outra fonte. 
 O que estou fazendo aqui é só para simular o ambiente para que vocês possam ver como funciona todo o processo do início ao fim.
 
+- Todos os Script estará em ordem para o melhor entendimento do projeto. Aqui será mais a parte para compreender o que está sendo feito e também a linha do tempo de criação do DW!!! Let's go!
 
 - Agora que compreendemos a necessidade do cliente mantenha o foco nele!!! Objetividade e Simplicidade são uma Arte então vamos praticar!
 Vou procurar ser objetivo, mantendo as coisas simples não inventando coisas desnecessária apenas para aumentar o projeto para deixar as coisas mais interessante ou parecer mais sábio do que eu sou realmente é embora essa não seja a regra em várias situações. Vou manter o foco no cliente.
@@ -81,10 +82,11 @@ Interfaces ETL para integração com as fontes de dados.
 
 ## Atenção !!!
 
-- Nesses processos de levantamento de requisitos e necessidade do cliente não é responsabilidade do Engenheiro de dado mas quis mostrar o início do projeto para ter uma direção e entendimento de como se inicia um projeto de implementação de um Data Warehouse a partir daqui iremos focar na parte que é responsabilidade de um Engenheiro de dados!!!
+- Nesses processos de levantamento de requisitos e Entregavéis do projeto como Buusiness Case, Especificação Funcional do cliente não é responsabilidade do Engenheiro de dado mas quis mostrar o início do projeto para ter uma direção e entendimento de como se inicia um projeto de implementação de um Data Warehouse a partir daqui iremos focar na parte que é responsabilidade de um Engenheiro de dados!!!
+- 
 Como não tenho um Banco de dados para usar de base irei criar um banco de dados no Oracle como fonte de dados do nosso DW.
 
-- Todos os Script estará em ordem para o melhor entendimento do projeto. Aqui será mais a parte para compreender o que está sendo feito e também a linha do tempo de criação do DW!!! Let's go!
+
 
 ## Arquitetura do Data Warehouse 
 
