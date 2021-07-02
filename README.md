@@ -79,6 +79,8 @@ Como não tenho um Banco de dados para usar de base irei criar um banco de dados
 
 A Staging Area é uma área intermediária usada para o processamento de dados durante o ETL antes de ir para o DW. Basicamente os dados que entra no DW já precisa estar tratos integrados e validados por isso uma área separada para fazer isso.
 
+## Modelo Lógico e Modelo Dimensional 
+
 O Modelo logico básico para todo projeto de implementação de um DW ele é necessário para entender todo o segmento e necessidade da empresa.
 ![6](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/6.png)
 Uma dica> quanto mais completo estiver o seu modelo dimensional será mais fácil a criação do seu modelo físico então de bastante atenção a esta etapa. 
@@ -109,6 +111,8 @@ Então na Staging Area nós vamos prepara os dados para depois efetuar a carga n
 - Nós não usaremos o processo ETL para dimensão Tempo isso nós faremos manualmente no momento que iremos criar o DW.
 Na Staging Area nós vamos trabalhar a dimensão Cliente, Localidade e Produto vamos coletar os dados da fonte verificar se precisamos de algum tipo de transformação se eu tenho que limpar os dados e já vou preparando os dados para posterior carga. Além disso, nós vamos preparar uma tabela de vendas não vou preparar a tabela fato ok eu vou prepara a tabela de Vendas porque pelo o que soubemos do nosso projeto os dados de vendas eles estão espalhados por mais de uma Tabela então eu vou agrupar esses dados vou reorganizar colocar em uma única estrutura única tabela e também já preparar para posterior carga na tabela FATO, basicamente vamos preparar dados 4 tabelas. 3 dimensões e para tabela fato e dimensão tempo faremos no DW.
  
+ 
+ ## FIM do Projeto /\ Agora é melhorias continuas!!! 
 
 
 - Agora com o DW pronto precisamos fazer melhorias no nosso DW
