@@ -26,7 +26,7 @@ A XYZ Inc. é uma empresa que vende eletrônicos, especialmente equipamentos de 
 
 - Então vamos implementar um processo que algumas empresas paga milhares de reais para implementar e por isso vou tentar mostrar o passo a passo. 
 Vou tomar como base que você já implementou o Oracle no SO Linux(Redhat), se eu fizesse esse processo o projeto ficaria gigantesco e tiraria o foco da criação do DW.
- Como estou fazendo um processo pessoal só terei um Banco de dados que é o Oracle, mas ele vai servir para 3 propósito diferente nos teremos um esquema para fonte de dados, um esquema para Staging Area e um esquema para o DW em si.
+ Como estou fazendo um projeto pessoal só terei um Banco de dados que é o Oracle, mas ele vai servir para 3 propósito diferente nos teremos um esquema para fonte de dados, um esquema para Staging Area e um esquema para o DW em si.
 vamos começar executando o sistema para fonte de dados. Lembrando que em um projeto de DW você não precisa cria a fonte isso será o sistema de banco de dados RCP, sistema CRM, uma planilha Excel, um arquivo txt ou de qualquer outra fonte. 
 O que estou fazendo aqui é só para simular o ambiente para que vocês possam ver como funciona todo o processo do início ao fim.
 
