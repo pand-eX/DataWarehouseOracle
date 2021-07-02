@@ -32,6 +32,7 @@ O que estou fazendo aqui é só para simular o ambiente para que vocês possam v
 
 - Todos os Script estará em ordem para o melhor entendimento do projeto. Aqui será mais a parte para compreender o que está sendo feito e também a linha do tempo de criação do DW!!! Let's go!
 
+
 - Agora que compreendemos a necessidade do cliente mantenha o foco nele!!! Objetividade e Simplicidade são uma Arte então vamos praticar!
 Vou procurar ser objetivo, mantendo as coisas simples não inventando coisas desnecessária apenas para aumentar o projeto para deixar as coisas mais interessante ou parecer mais sábio do que eu sou realmente é embora essa não seja a regra em várias situações. Vou manter o foco no cliente.
 Para iniciarmos o projeto precisamos estudar o processo de implementação de uma solução de Business Intelligence porque o Data Warehouse é um componente de uma solução de BI
@@ -83,12 +84,11 @@ Interfaces ETL para integração com as fontes de dados.
 ## Atenção !!!
 
 - Nesses processos de levantamento de requisitos e Entregavéis do projeto como Buusiness Case, Especificação Funcional do cliente não é responsabilidade do Engenheiro de dado mas quis mostrar o início do projeto para ter uma direção e entendimento de como se inicia um projeto de implementação de um Data Warehouse a partir daqui iremos focar na parte que é responsabilidade de um Engenheiro de dados!!!
-- 
-Como não tenho um Banco de dados para usar de base irei criar um banco de dados no Oracle como fonte de dados do nosso DW.
 
 
 
 ## Arquitetura do Data Warehouse 
+
 
 ![5](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/5.png)
 
