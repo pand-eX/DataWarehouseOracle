@@ -24,7 +24,14 @@ A XYZ Inc. é uma empresa que vende eletrônicos, especialmente equipamentos de 
 
 ## Iniciando o Projeto Passo a Passo!!!
 
-Agora que compreendemos a necessidade do cliente mantenha o foco nele!!! Objetividade e Simplicidade são uma Arte então vamos praticar!
+- Então vamos implementar um processo que algumas empresas paga milhares de reais para implementar e por isso vou tentar mostrar o passo a passo. 
+Vou tomar como base que você já implementou o Oracle no SO Linux(Redhat), se eu fizesse esse processo o projeto ficaria gigantesco e tiraria o foco da criação do DW.
+ Como estou fazendo um processo pessoal só terei um Banco de dados que é o Oracle, mas ele vai servir para 3 propósito diferente nos teremos um esquema para fonte de dados, um esquema para Staging Area e um esquema para o DW em si.
+vamos começar executando o sistema para fonte de dados. Lembrando que em um projeto de DW você não precisa cria a fonte isso será o sistema de banco de dados RCP, sistema CRM, uma planilha Excel, um arquivo txt ou de qualquer outra fonte. 
+O que estou fazendo aqui é só para simular o ambiente para que vocês possam ver como funciona todo o processo do início ao fim.
+
+
+- Agora que compreendemos a necessidade do cliente mantenha o foco nele!!! Objetividade e Simplicidade são uma Arte então vamos praticar!
 Vou procurar ser objetivo, mantendo as coisas simples não inventando coisas desnecessária apenas para aumentar o projeto para deixar as coisas mais interessante ou parecer mais sábio do que eu sou realmente é embora essa não seja a regra em várias situações. Vou manter o foco no cliente.
 Para iniciarmos o projeto precisamos estudar o processo de implementação de uma solução de Business Intelligence porque o Data Warehouse é um componente de uma solução de BI
 
@@ -87,8 +94,13 @@ A Staging Area é uma área intermediária usada para o processamento de dados d
 
 ## Modelo Lógico e Modelo Dimensional 
 
-O Modelo logico básico para todo projeto de implementação de um DW ele é necessário para entender todo o segmento e necessidade da empresa.
 ![6](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/6.png)
+
+O Modelo logico básico para todo projeto de implementação de um DW ele é necessário para entender todo o segmento e necessidade da empresa.
+
+
+![7](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/7.png)
+
 Uma dica> quanto mais completo estiver o seu modelo dimensional será mais fácil a criação do seu modelo físico então de bastante atenção a esta etapa. 
 - Star Squema é um modelo mais consolidado e um modelo um pouco mais normalizado 
 - Primeiro lá no modelo lógico não tínhamos a dimensão TEMPO o tempo ele registra a data da venda eventualmente o ano, mês a semana o dia, mas isso é uma informação da venda aqui no modelo Dimensional eu preciso controlar o tempo de uma maneira um pouco mais detalhada até porque nas especificações do cliente ficou claro que ele quer o relatório por dia então eu já sei que o meu nível de Granularidade é até dia então eu preciso extrair da data as informações de ano, mês, semana e dia.
@@ -101,14 +113,10 @@ Vamos compreender a necessidade do projeto de Chaves e as diferenças entre Surr
 - Uma das dimensões do seu modelo Dimensional é bastante especial que é o TEMPO e estará em qualquer DW que sempre estará lá para suportar exatamente umas das perguntas principais que você faz para o Data Warehouse ou seja, quando ocorreu aquela venda, quando ocorreu aquela “situação” nós queremos que nosso Data Warehouse responda várias perguntas umas delas é exatamente relacionada ao tempo. A dimensão de tempo não é carregada junto com o processo ETL, ou seja, você não precisa ficar atualizando constantemente a sua dimensão de tempo porque na verdade ela é uma estrutura praticamente estática é uma dimensão que raramente vai mudar. Algumas características quando você construir essa dimensão, veja que nos primeiros temos uma Surrogate Key ou seja um ID único para cada umas das entradas e uma Coluna com a Data do tipo Date e que data é essa? É cada uma das datas que representa cada uma das datas do período de trabalho daquele DW qual é o ano do DW quem responde é o cliente 1 ano? 2 anos? 3 anos? 20 anos? O cliente vai definir qual o período de dados que ele quer analisar então supondo que ele queira quatro anos eu terei entrada de datas para esses 4 anos para que eu posso criar os cruzamentos. 
 - Preencha toda a Documentação de todas as colunas sempre que você estiver criando seu modelo Dimensional.
 - Modelo Físico ele compreende a criação das Tabelas a definição do armazenamento se eu vou ou não usar ou particionamento, ou seja, se eu terei uma tabela distribuída em mais de um arquivo físico ainda no modelo físico nós definimos também como será a indexação temos que criar algum projeto de índice e tudo isso ocorre na modelagem física  
-- Então vamos implementar um processo que algumas empresas paga milhares de reais para implementar e por isso vou tentar mostrar o passo a passo. 
-Vou tomar como base que você já implementou o Oracle no SO Linux, se não o projeto ficaria gigantesco e tiraria o foco da criação do DW.
- Como eu disse só terei um Banco que é o Oracle, mas ele vai servir para 3 proposito diferente nos teremos um esquema para fonte de dados, um esquema para Staging Area e um esquema para o DW em si.
-vamos começar executando o sistema para fonte de dados. Lembrando que em um projeto de DW você não precisa cria a fonte isso será o sistema de banco de dados RCP, sistema CRM, uma planilha Excel, de um arquivo txt ou de qualquer outra fonte. 
-Oque estou fazendo aqui é só para simular o ambiente para que vocês possam ver como funciona todo o processo do início ao fim.
 
-![7](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/7.png)
-Esse é o nosso objetivo nós queremos cria um modelo dimensional lá no DW eu tenho a fonte de dados inclusive já extrair esses dados para Staging Area mas os dados estão em formato bruto estão sem limpeza eles necessitam de um processo de transformação manipular esses dados esse é o processo ETL 
+
+
+ - Esse é o nosso objetivo nós queremos cria um modelo dimensional lá no DW eu tenho a fonte de dados inclusive já extrair esses dados para Staging Area mas os dados estão em formato bruto estão sem limpeza eles necessitam de um processo de transformação manipular esses dados esse é o processo ETL 
 ETL é como Raul seixas dizia > é uma metamorfose ambulante está sempre em processo de mudança. Precisamos ter a aptidões necessárias para reconhecer tanto as analise técnicas e também as questões envolvidas nas regras de negócio.
 
 - /\ A 1 tabela que vamos carregar é da dimensão Tempo porque os dados da dimensão tempo não vem no ETL ou normalmente não vem. Criando uma operação especifica para carregar a Dimensão Tempo lembrando que dificilmente ela vai mudar ou vai mudar muito pouco na vida útil do seu DW nós não precisamos incluir isso no ETL mas REPITO dependendo do Projeto não existe uma regra única não existe só um padrão vai sempre depender do projeto na maioria dos casos a dimensão Tempo ela varia muito pouco sendo assim, nós podemos gerar os dados que serão carregados dentro dessa TABELA, que dados são esses? Dados referente a data em um determinado período 
