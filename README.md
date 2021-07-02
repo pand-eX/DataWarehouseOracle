@@ -117,13 +117,19 @@ Na Staging Area nós vamos trabalhar a dimensão Cliente, Localidade e Produto v
 
 - Agora com o DW pronto precisamos fazer melhorias no nosso DW
 - Deixei de maneira proposital lá na fonte de dados do banco transacional no usuário source uma categoria de hierarquia que não foi bem implementada
+
+
 ![8](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/8.png)
+
 Você pode ver repetição das categorias e isso não pode acontecer no banco de dados Transacional na fonte porque os dados precisam ser NORMALIZADOS .... O dados não é normalizados lá no DW mas na FONTE no banco de dados transacional precisa ser normalizado.
+
+## Implementando Hierarquia na Fonte do banco de dados
 
 Vamos implementar a Hierarquia de forma correta e teremos que alterar todo o processo ETL até carregar de novo nosso TABELA FATO
 Primeiro vamos compreender o nível de Hierarquia
 
 ![9](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/9.png)
+
 É categoria de acordo com aquilo que a empresa vende ou fornece produto ou Serviço, abaixo dessa categoria nós temos a categoria filha, pessoal e business /\ notebooks para uso pessoal e para uso de empresa serviço. E eu então vou ter cada produto associado ao menor nível da minha Hierarquia o nome do produto Notebook MSI é um grão, ou seja, é o menor nível de Granularidade nós podemos ter níveis do tamanho que quisermos depende daquilo que a empresa implementa. 
 As vendas não são associadas a Categoria, o que você vende é o produto o que temos aqui é a Hierarquia para podemos categorizar esses produtos porque depois eu quero emitir um relatório quais foram as Categorias que mais venderam. Quais foram as categorias que mais venderam por região. Quais as categorias que mais venderam por tipo de cliente e etc...
 Produto não entra na tabela Categoria porque temos uma tabela apenas para produto depois eu preciso entrar na tabela produto e atualizar a categoria.
@@ -134,7 +140,9 @@ Produto não entra na tabela Categoria porque temos uma tabela apenas para produ
 Agora como disse a cima vamos atualizar a tabela de Produto. Nós mudamos o ID_CATEGORIA e isso não reflete mais na tabela produto, só conseguimos fazer isso pq nós desativamos a Constraints que é a restrição que mantém a integridade referencial então nós desativamos a Constraints, comando > 
 ALTER TABLE TB_PRODUTO MODIFY CONSTRAINT TB_PRODUTO_FK1 DISABLE; Utilizamos esse comando antes de realizar todo o processo a cima. Por isso eu conseguir modificar a tabela Categoria mas se agora eu não atualizar a tabela de Produto ficara toda equivocada./\ MODIFICOU AGORA ATIVA PARA FAZER A QUERY comando >
 ALTER TABLE TB_PRODUTO MODIFY CONSTRAINT TB_PRODUTO_FK1 ENABLE;
-É IMPORTANTISSIMO LEMBRAR DE ATIVAR E DESATIVAR AS CONSTRAINTS ESSE É UM PROCESSO QUE FAZEMOS BASTANTE NO DURANTE O PROCESSO ETL PRINCIPALMENTE ANTES DE CARREGAR OS DADOS NORMALMENTE VOCÊ DESATIVA OS INDICES E AS CONSTRAINT LÁ DO SEU DW EFETUA A CARGA DEPOIS ATIVA DENOVO SE VOCÊ NÃO ATIVAR VAI TER PROBLEMA DEPOIS NA INTEGRIDADE REFERENCIAL.
+É IMPORTANTISSIMO LEMBRAR DE ATIVAR E DESATIVAR AS CONSTRAINTS ESSE É UM PROCESSO QUE FAZEMOS BASTANTE DURANTE O PROCESSO ETL PRINCIPALMENTE ANTES DE CARREGAR OS DADOS NORMALMENTE VOCÊ DESATIVA OS INDICES E AS CONSTRAINT LÁ DO SEU DW EFETUA A CARGA DEPOIS ATIVA DENOVO SE VOCÊ NÃO ATIVAR VAI TER PROBLEMA DEPOIS NA INTEGRIDADE REFERENCIAL.
+
+## Melhorando a performance VIEW
 
 - Nós podemos ter várias views no nosso banco de dados, podemos criar uma visão por exemplo com uma regra de negócio ou seja, incluo uma clausula WERE essa visão poderia ter vendas apenas de 2018 /\ 2019 etc... Podemos criar uma Visão para cada mês do ano podemos criar uma visão para categoria por exemplo e ai vou criando as visões e depois eu alimento lá por exemplo quando tiver utilizando uma ferramenta de BI ao invés da ferramenta de BI utilizar a QUERY faz uma consulta direta na VIEW é uma boa prática é bem mais seguro pq se eu depois precisar mudar a query eu mudo a query dentro da view mas o meu sistema de BI vai estar apontando para VIEW não preciso mudar nada no sistema eu mudo apenas a view no banco de dados. 
 - Só tem uma pequena questão aqui quando nós usamos uma VIEW na prática o que o banco de dados faz é executar a QUERY isso aqui é bom para o ser humano ele não precisa saber da QUERY é simples dar um select na VIEW mas internamente o banco de dados sabe que isso é uma VIEW e executa a query é claro e isso tem um custo no banco de dados vamos visualizar o que é esse custo. (EXPLAIN PLAN FOR /\ EXPLIQUE O PLANO PARA QUERY A BAIXO) 
@@ -149,7 +157,12 @@ EXEC DBMS_MVIEW.refresh(‘mv_vendas_2018’);
 
 ![12](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/12.png)
 
+
+
 ## Uma coisa importante é definir a estratégia de Refresh 
+
+
+
 
 ![13](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/13.png)
 Algumas empresas deleta todo o DW e faz o Refresh com os novos dados você atualiza o DW INTEIRO (Depende de vários fatores inclusive o tamanho do DW)
