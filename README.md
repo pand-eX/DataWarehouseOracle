@@ -70,8 +70,13 @@ Este projeto faz parte do projeto BIAVANTE da XYZ Inc, tendo como objetivo imple
 - O Projeto inclui a entrega de dois produtos:
  Data Warehouse
 Interfaces ETL para integração com as fontes de dados.
-- Nesses processos de levantamento de requisitos e necessidade do cliente não é responsabilidade do Engenheiro de dado mas, quis mostrar o início do projeto para ter uma direção e entendimento de como se inicia um projeto de implementação de um Data Warehouse a partir daqui iremos focar na parte que é responsabilidade de um Engenheiro de dados!!!
+
+## Atenção !!!
+
+- Nesses processos de levantamento de requisitos e necessidade do cliente não é responsabilidade do Engenheiro de dado mas quis mostrar o início do projeto para ter uma direção e entendimento de como se inicia um projeto de implementação de um Data Warehouse a partir daqui iremos focar na parte que é responsabilidade de um Engenheiro de dados!!!
 Como não tenho um Banco de dados para usar de base irei criar um banco de dados no Oracle como fonte de dados do nosso DW.
+
+- Todos os Script estará em ordem para o melhor entendimento do projeto. Aqui será mais a parte para compreender o que está sendo feito e também a linha do tempo de criação do DW!!! Let's go!
 
 ## Arquitetura do Data Warehouse 
 
