@@ -56,30 +56,62 @@ Na parte de Compreensão das necessidades do cliente precisa fazer uma reunião 
 - Quais os recursos disponíveis?
 - Quais são os relatórios atuais 
 e ainda nessa etapa reuniões internas com diferentes atores-chaves. Análise de documentos. Consulta a processos e métodos usados na empresa. Mapeamento de processos.
+
+
 No Levantamento de Requisitos a reunião são com os analistas com algumas pessoas que são os líderes de equipe aqueles Profissional que tem o conhecimento da área de negócio em si listamos algumas dessas tarefas:
+
+
 - Reuniões com profissionais funcionais.
+
 -Lista de requisitos principais.
+
 -Aceite e concordância entre os key stakeholders.
+
 -Critérios de aceite.
+
 -Detalhes sobre o funcionamento final da solução
+
 -Entregáveis finais do projeto.
+
 -Os requerimentos devem ser Smart(specific, Measurable, Attainable, Relevant e Time-Based)
+
 -Sessões de Feedback.
+
+
 Arquitetura é preciso de pessoas da área de TI para montar a solução que seja viável tecnicamente nela listaremos algumas etapas:
+
+
 -Reuniões internas com equipe de TI.
+
 -Identificar fontes de dados.
+
 -Identificar Recursos computacionais.
+
 -Sistemas legados.
+
 -Integrações e Interfaces
+
 -Fornecedores que impactam no projeto.
+
 - Como os dados são armazenados
+- 
 -Design da solução de ETL(Extract, Transform and Load)
+
 -Modelagem (Lógica, dimensional e Física)
+
+
 - Objetivo do Projeto 
+
+
 Este projeto faz parte do projeto BIAVANTE da XYZ Inc, tendo como objetivo implementar um Data WareHouse para suportar as soluções de BI, análise e tomada de decisões.
+
 - O Projeto inclui a entrega de dois produtos:
- Data Warehouse
-Interfaces ETL para integração com as fontes de dados.
+
+
+ -Data Warehouse
+ 
+ -Interfaces ETL para integração com as fontes de dados.
+ 
 
 ## Atenção !!!
 
