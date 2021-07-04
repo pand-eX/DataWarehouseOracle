@@ -102,9 +102,7 @@ Na Arquitetura é preciso de pessoas da área de TI para montar a solução que 
 - Modelagem (Lógica, dimensional e Física)
 
 
-- Objetivo do Projeto 
-
-
+-Objetivo do Projeto:
 Este projeto faz parte do projeto BIAVANTE da XYZ Inc, tendo como objetivo implementar um Data WareHouse para suportar as soluções de BI, análise e tomada de decisões.
 
 - O Projeto inclui a entrega de dois produtos:
