@@ -63,41 +63,43 @@ No Levantamento de Requisitos a reunião são com os analistas com algumas pesso
 
 - Reuniões com profissionais funcionais.
 
--Lista de requisitos principais.
+- Lista de requisitos principais.
 
--Aceite e concordância entre os key stakeholders.
+- Aceite e concordância entre os key stakeholders.
 
--Critérios de aceite.
+- Critérios de aceite.
 
--Detalhes sobre o funcionamento final da solução
+- Detalhes sobre o funcionamento final da solução
 
--Entregáveis finais do projeto.
+- Entregáveis finais do projeto.
 
--Os requerimentos devem ser Smart(specific, Measurable, Attainable, Relevant e Time-Based)
+- Os requerimentos devem ser Smart(specific, Measurable, Attainable, Relevant e Time-Based)
 
--Sessões de Feedback.
-
-
-Arquitetura é preciso de pessoas da área de TI para montar a solução que seja viável tecnicamente nela listaremos algumas etapas:
+- Sessões de Feedback.
 
 
--Reuniões internas com equipe de TI.
 
--Identificar fontes de dados.
 
--Identificar Recursos computacionais.
+Na Arquitetura é preciso de pessoas da área de TI para montar a solução que seja viável tecnicamente nela listaremos algumas etapas:
 
--Sistemas legados.
 
--Integrações e Interfaces
+- Reuniões internas com equipe de TI.
 
--Fornecedores que impactam no projeto.
+- Identificar fontes de dados.
+
+- Identificar Recursos computacionais.
+
+- Sistemas legados.
+
+- Integrações e Interfaces
+
+- Fornecedores que impactam no projeto.
 
 - Como os dados são armazenados
-- 
--Design da solução de ETL(Extract, Transform and Load)
+ 
+- Design da solução de ETL(Extract, Transform and Load)
 
--Modelagem (Lógica, dimensional e Física)
+- Modelagem (Lógica, dimensional e Física)
 
 
 - Objetivo do Projeto 
