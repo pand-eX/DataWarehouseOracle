@@ -197,11 +197,14 @@ ALTER TABLE TB_PRODUTO MODIFY CONSTRAINT TB_PRODUTO_FK1 ENABLE;
 
 
 ![11](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/11.png)
+
+
 Como o otimizador do banco de dados executou essa query? Da seguinte forma! Ele fez o Select Statement /\ ORDER BY /\ utilizou o HASH para o grupo BY e o JOIN e fez um TABLE ACESS FULL ou seja ele não usou nem um índice.
 - Claro que no meu exemplo isso não faz diferença porque temos poucas linhas mas se ao invés de 7 linhas eu tivesse 7 milhões de linhas isso aqui faria toda a diferença a query ia ficar muito lenta criar uma VIEW é uma boa alternativa mas não resolve muito o problema da performance porque ainda estou executando a query do mesmo jeito. Então para resolver isso criei uma Materialized VIEWs aonde eu vou armazenar no banco de dados o resultado da execução da QUERY. O que quero é basicamente cada vez que eu executar a VIEW eu não quero executar a QUERY o que quero é olhar para os dados já armazenado no DW aquela QUERY que faz parte dessa VIEW nós vamos executa lá e gravar os registro em um banco de dados quando eu chamar a view novamente eu vou estar com outro plano de execução muito mais veloz 
 Repare que ele fez um ACESS FULL apenas em uma tabela que foi a que a gente criou a View materializada se você ver a diferença do plano de execução lá da nossa Query ele fez o TABLE SCAN em 3 tabelas diferentes agora não eu varro apenas uma única tabela tempo de execução é infinitamente menor e eu consigo otimizar de maneira considerável a performance do banco de dados ela também é útil quando você quer conectar em banco de dados remotos por exemplo você tem um DW em um Servidor na unidade de São Paulo e os analista estão no Rio de Janeiro como você vai trafegar os dados?  Eu posso criar uma View Materializada que ela vai consultar do Rio para São Paulo, ela vai em São Paulo consulta o banco de dados traz os dados é claro que isso vai demorar um pouco eu posso cria a View Materializada de noite e no dia seguinte os analista do Rio de Janeiro for trabalhar eles vão consultar os dados localmente do Rio de Janeiro porque criamos a materializad no rio não precisa ficar gastando largura de banda para executar consulta entre Rio e São Paulo eu crio um Data Base Link entre os dois bancos crio uma views materialized no Rio apontando para os dados de São Paulo faço esse processo anoite no dia seguinte os analista estão felizes da vida trabalhando com Alta Performance. E se eu por acaso inserir mais dados na tabela fato? Com certeza a View materialized vai ficar desatualizada porque eu executei a Query apenas uma vez. Para isso podemos fazer um Refrash da View Materializada comando >
 EXEC DBMS_MVIEW.refresh(‘mv_vendas_2018’);
 -Domingo o DBA do Rio cria a View Materializada durante segunda feira tão trabalhando normalmente, consultando os dados locais quando for na segunda a noite o DBA do Rio agenda esse REFRESH então ele vai atualizar a view materializada a noite com os novos dados que foram carregados na tabela fato na terça de manhã os analistas continuam trabalhando com a view materializada feliz da vida com Alta Performance. Um ambiente profissional
+
 
 ![12](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/12.png)
 
@@ -213,26 +216,38 @@ EXEC DBMS_MVIEW.refresh(‘mv_vendas_2018’);
 
 
 ![13](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/13.png)
+
+
 Algumas empresas deleta todo o DW e faz o Refresh com os novos dados você atualiza o DW INTEIRO (Depende de vários fatores inclusive o tamanho do DW)
 -Outras empresas atualizam o DW, ou seja, apenas aplica as mudanças desde a última carga (dependendo do tamanho do DW é uma abordagem)
 -E você pode encontrar forma de detectar as mudanças que ocorreram no sistema fonte entre uma carga e outra e aplicar apenas essas mudanças isso vai reduzir bastante a sua janela de atualização. 
 
 ![14](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/14.png)
 
+
 ![15](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/15.png)
+
 Dependendo do banco de dados podemos usar a tecnologia Golden Gate.
 No meu caso do banco de dados Oracle nós podemos utilizar o Arquive Logs ele tem um conceito de Data Guard você pode criar uma espécie de banco de dados cópia e todos os Logs do banco de dados os logs(é que contém todos os comandos DML que são aplicado em todas as tabelas são os Logs do banco de dados você pode pega os arquives que exatamente é o resultados desses Logs mover isso para outro banco de dados e aplicar os arquives que é basicamente aplicar as aplicações DML, aquele outro banco de dados fica como se fosse uma cópia) você pode aplicar uma solução semelhante no DW e temos o conceito Golden gate que é para trabalhar com Streaming de dados você pode configurar o Golden Gate para olhar para sua fonte seja ela qual for não apenas o Banco Relacional capturar apenas as mudanças e aplicar no seu sistema Destino. 
 
 ![16](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/16.png)
+
+
 Aqui podemos fazer várias partições para cada mês e quando você atualiza os dados você pode atualizar por partição não preciso atualizar o DW inteiro isso reduz consideravelmente o volume de dados e acelera o tempo de carga e você pode utilizar essa opção e depois se necessário poderia limpar os dados por partição supondo que uma empresa queria por exemplo atualizar os dados de junho eu posso limpar apenas as partições dos dados de junho e carregar apenas nessa partição. Se a partição que são arquivos físicos tiverem em Disco diferente o fato de carregar uma partição não afetaria a performance de consulta dos dados em outra partição ou seja escolher a melhor estratégia de acordo com o que a empresa tem em sua disposição lembrando que o Oracle Particion que é a funcionalidade do oracle para particionamento tem uma licença a parte. 
 
 ![17](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/17.png)
+
+
 No caso de uma empresa ter o nível de granularidade de 5 anos e passa 6 anos precisamos fazer uma estratégia para essa demanda. O que as empresas fazem é criar uma cópia da dimensão, mantendo apenas uma cópia daquele ano que não está no período de 5 anos então você tem no DW apenas os 5 anos, mas se necessário os dados históricos estão ali em mãos em disposição você cria uma cópia da Dimensão e pronto e inclusive você pode utilizar essa cópia em relatórios mesmo você pode criar os relatórios lá na ferramenta de BI apontando para essa dimensão de históricos. 
 
 ![18](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/18.png)
+
+
 Parecido com o SLOWLY CHANGING DIMENSIONS Cada vez que você adicionar um registro você pode guardar o anterior bastaria eu mudar aquela FLAG de ATIVO PARA INATIVO coloca uma data que aquele arquivo foi descontinuado e insiro um novo registro com isso você mantém os históricos dos dados, mas ainda mantendo o versionamento dependendo do DW algumas empresas opta por sobrescrever os dados pega os dados novos e passo por cima do antigo e você perde a informação histórica não existe uma regra vai depende sempre da área de negócio dos objetivos dos recursos disponíveis mas é uma boa pratica ter pelo menos alguns pratica de versionamento. Cria 3 colunas, data de início, data fim e a FLAG que controla a atualização por esses campos  
 
 ![19](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/19.png)
 
+
 # 10 Erros comuns a se evitar em Projetos de Data Warehouse.
+
 ![20](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/20.png)
