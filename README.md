@@ -39,11 +39,11 @@ To start the project we need to study the process of implementing a Business Int
  
 ##The BI implementation process has 5 main ones: 
 
-- Fase 1 > Definição do Problema
-- Fase 2 > Extração e Integração de Dados
-- Fase 3 > Armazenamento no DW
-- Fase 4 > Análise
-- Fase 5 > Tomada de Decisões
+- Phase 1> Problem Definition
+- Phase 2> Data Extraction and Integration
+- Phase 3> Storage in DW
+- Phase 4> Analysis
+- Phase 5> Decision Making
 
  
 ![2](https://github.com/pand-eX/DataWarehouseOracle/blob/main/assets/img/2.png)
